@@ -1,0 +1,23 @@
+sequence = """FASTA format sequence"""
+# Removing new lines
+sequence = sequence.replace("\n", "")
+# Total nucleotide calculation in the sequence
+total_nucleotides = len(sequence)
+# Calculate GC1, GC2, GC3 content
+def calculate_gc_positions(sequence):
+gc1 = gc2 = gc3 = 0
+for i in range(0, len(sequence), 3):
+if i < len(sequence) and sequence[i] in "GC":
+gc1 += 1
+if i+1 < len(sequence) and sequence[i+1] in "GC":
+gc2 += 1
+if i+2 < len(sequence) and sequence[i+2] in "GC":
+gc3 += 1
+return gc1, gc2, gc3
+# Calculate GC1, GC2, and GC3 percentage
+gc1, gc2, gc3 = calculate_gc_positions(sequence)
+gc1_percentage = (gc1 / (total_nucleotides / 3)) * 100
+gc2_percentage = (gc2 / (total_nucleotides / 3)) * 100
+gc3_percentage = (gc3 / (total_nucleotides / 3)) * 100
+gc1_percentage, gc2_percentage, gc3_percentage
+print(gc1_percentage, gc2_percentage, gc3_percentage)
