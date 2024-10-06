@@ -1,1 +1,2 @@
-Pyhton code to calculate GC1 GC2 and GC3 from a DNA barcode
+Pyhton code to calculate the nucleotide composition
+Paste the FASTA format sequence
