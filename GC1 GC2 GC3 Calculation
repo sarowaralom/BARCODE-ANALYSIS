@@ -1,23 +1,24 @@
-sequence = """FASTA format sequence"""
-# Removing new lines
+sequence = """fatsa sequence"""
+
+# Removing any newline characters in the sequence
 sequence = sequence.replace("\n", "")
-# Total nucleotide calculation in the sequence
-total_nucleotides = len(sequence)
-# Calculate GC1, GC2, GC3 content
-def calculate_gc_positions(sequence):
-gc1 = gc2 = gc3 = 0
-for i in range(0, len(sequence), 3):
-if i < len(sequence) and sequence[i] in "GC":
-gc1 += 1
-if i+1 < len(sequence) and sequence[i+1] in "GC":
-gc2 += 1
-if i+2 < len(sequence) and sequence[i+2] in "GC":
-gc3 += 1
-return gc1, gc2, gc3
-# Calculate GC1, GC2, and GC3 percentage
-gc1, gc2, gc3 = calculate_gc_positions(sequence)
-gc1_percentage = (gc1 / (total_nucleotides / 3)) * 100
-gc2_percentage = (gc2 / (total_nucleotides / 3)) * 100
-gc3_percentage = (gc3 / (total_nucleotides / 3)) * 100
-gc1_percentage, gc2_percentage, gc3_percentage
-print(gc1_percentage, gc2_percentage, gc3_percentage)
+
+# Counting occurrences of A, T, G, and C
+counts = {
+    'A': sequence.count('A'),
+    'T': sequence.count('T'),
+    'G': sequence.count('G'),
+    'C': sequence.count('C')
+}
+
+# Calculating AT, GC content
+total_bases = len(sequence)
+AT_content = (counts['A'] + counts['T']) / total_bases * 100
+GC_content = (counts['G'] + counts['C']) / total_bases * 100
+
+# Calculating GC content at position 1, 2, and 3
+GC1 = sum(1 for i in range(0, total_bases, 3) if sequence[i] in "GC") / (total_bases / 3) * 100
+GC2 = sum(1 for i in range(1, total_bases, 3) if sequence[i] in "GC") / (total_bases / 3) * 100
+GC3 = sum(1 for i in range(2, total_bases, 3) if sequence[i] in "GC") / (total_bases / 3) * 100
+
+print (counts, AT_content, GC_content, GC1, GC2, GC3)
